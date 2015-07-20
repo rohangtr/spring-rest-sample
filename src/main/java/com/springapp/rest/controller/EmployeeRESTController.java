@@ -79,6 +79,5 @@ public class EmployeeRESTController
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("message", "Employee succesfully added");
         return new ResponseEntity<JSONObject>(jsonObject,HttpStatus.OK);
-      
     }
 }
