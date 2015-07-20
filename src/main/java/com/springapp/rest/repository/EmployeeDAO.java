@@ -6,11 +6,11 @@ import com.springapp.rest.model.Employee;
 
 public interface EmployeeDAO {
 	
-	public Employee getEmployee(Integer id);
+	public Employee getEmployee(Long id);
 		
 	public List<Employee> getEmployeeList();
 	
 	public void saveEmployee(Employee emp);
 	
-	public boolean deleteEmployee(Integer id);
+	public boolean deleteEmployee(Long id);
 }

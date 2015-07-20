@@ -2,11 +2,17 @@ package com.springapp.rest.model;
  
 import java.io.Serializable;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+@Entity
 public class Employee implements Serializable
 {
     private static final long serialVersionUID = 1L;
     
-    private Integer id;
+    @Id
+    @GeneratedValue
+    private Long id;
 
     private String firstName;
  
@@ -14,7 +20,7 @@ public class Employee implements Serializable
 
     private String email;
      
-    public Employee(Integer id, String firstName, String lastName, String email) {
+    public Employee(Long id, String firstName, String lastName, String email) {
         super();
         this.id = id;
         this.firstName = firstName;
@@ -26,11 +32,11 @@ public class Employee implements Serializable
          
     }
  
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
  
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
  

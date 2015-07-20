@@ -2,6 +2,9 @@ package com.springapp.rest.controller;
  
 import java.util.List;
 
+import javax.inject.Inject;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -13,34 +16,42 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.springapp.rest.model.Employee;
 import com.springapp.rest.repository.EmployeeDAO;
+import com.springapp.rest.repository.EmployeeRepository;
 import com.springapp.rest.repository.StaticEmployeeDAO;
+import com.springapp.rest.utilities.Utilities;
 
 import net.minidev.json.JSONObject;
  
 @Controller
 public class EmployeeRESTController 
 {
+	
+	@Autowired
+	EmployeeRepository employeeRepository;
+	
+	
     @RequestMapping(value = "/employees", 
     		method=RequestMethod.GET, 
     		produces=MediaType.APPLICATION_JSON_VALUE)
     
     public ResponseEntity<List<Employee>> getAllEmployees() 
     {
-    	EmployeeDAO empDAO = new StaticEmployeeDAO();
+    	System.out.println("rohan Emp"+ employeeRepository.findAll());
+    	List<Employee> emp = Utilities.makeList(employeeRepository.findAll());
     	
-        return  new ResponseEntity<List<Employee>>(empDAO.getEmployeeList(), HttpStatus.OK);
+        return  new ResponseEntity<List<Employee>>(emp, HttpStatus.OK);
     }
      
     @RequestMapping(value = "/employees/{id}", 
     		method=RequestMethod.GET, 
     		produces=MediaType.APPLICATION_JSON_VALUE)
     
-    public ResponseEntity<Employee> getEmployeeById (@PathVariable("id") int id) 
+    public ResponseEntity<Employee> getEmployeeById (@PathVariable("id") Long id) 
     {
-    	EmployeeDAO empDAO = new StaticEmployeeDAO();
     	
-        if (empDAO.getEmployee(id)!=null) {
-            Employee employee = empDAO.getEmployee(id);
+    	System.out.println("rohan");
+        if (employeeRepository.findOne(id)!=null) {
+            Employee employee = employeeRepository.findOne(id);
             return new ResponseEntity<Employee>(employee, HttpStatus.OK);
         }
         return new ResponseEntity<Employee>(HttpStatus.NOT_FOUND);
@@ -50,7 +61,7 @@ public class EmployeeRESTController
     		method=RequestMethod.DELETE, 
     		produces=MediaType.APPLICATION_JSON_VALUE)
     
-    public ResponseEntity<JSONObject> deleteEmployeeById (@PathVariable("id") int id) 
+    public ResponseEntity<JSONObject> deleteEmployeeById (@PathVariable("id") Long id) 
     {
     	EmployeeDAO empDAO = new StaticEmployeeDAO();
     	
