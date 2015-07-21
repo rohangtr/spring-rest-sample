@@ -36,7 +36,6 @@ public class EmployeeRESTController
     
     public ResponseEntity<List<Employee>> getAllEmployees() 
     {
-    	System.out.println("rohan Emp"+ employeeRepository.findAll());
     	List<Employee> emp = Utilities.makeList(employeeRepository.findAll());
     	
         return  new ResponseEntity<List<Employee>>(emp, HttpStatus.OK);
@@ -49,7 +48,6 @@ public class EmployeeRESTController
     public ResponseEntity<Employee> getEmployeeById (@PathVariable("id") Long id) 
     {
     	
-    	System.out.println("rohan");
         if (employeeRepository.findOne(id)!=null) {
             Employee employee = employeeRepository.findOne(id);
             return new ResponseEntity<Employee>(employee, HttpStatus.OK);
@@ -63,15 +61,15 @@ public class EmployeeRESTController
     
     public ResponseEntity<JSONObject> deleteEmployeeById (@PathVariable("id") Long id) 
     {
-    	EmployeeDAO empDAO = new StaticEmployeeDAO();
-    	
-        if (empDAO.deleteEmployee(id)) {
+
+        if (employeeRepository.exists(id)) {
         	JSONObject jsonObject = new JSONObject();
             jsonObject.put("message", "Employee succesfully deleted");
+            employeeRepository.delete(id);
             return new ResponseEntity<JSONObject>(jsonObject,HttpStatus.OK);
         }else{
         	JSONObject jsonObject = new JSONObject();
-            jsonObject.put("message", "Can not find");
+            jsonObject.put("message", "Can not find Employee");
         	return new ResponseEntity<JSONObject>(jsonObject,HttpStatus.NOT_FOUND);
         }
     }
@@ -80,13 +78,11 @@ public class EmployeeRESTController
     		method=RequestMethod.POST, 
     		produces=MediaType.APPLICATION_JSON_VALUE)
     
-    public ResponseEntity<JSONObject> postEmployeeById (@RequestBody String str) 
+    public ResponseEntity<JSONObject> postEmployeeById (@RequestBody Employee employee) 
     {
-    	System.out.println(str);
-    	Employee employee = new Employee();
-    	EmployeeDAO empDAO = new StaticEmployeeDAO();
+    	System.out.println(employee);
     	
-        empDAO.saveEmployee(employee);
+    	employeeRepository.save(employee);
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("message", "Employee succesfully added");
         return new ResponseEntity<JSONObject>(jsonObject,HttpStatus.OK);
