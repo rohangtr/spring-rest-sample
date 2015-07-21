@@ -1,16 +1,11 @@
 package com.springapp.rest.utilities;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
-
-import javax.inject.Inject;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.springapp.rest.model.Employee;
 import com.springapp.rest.repository.EmployeeRepository;
-import com.springapp.rest.repository.StaticEmployeeDAO;
 
 public class Utilities {
 	@Autowired

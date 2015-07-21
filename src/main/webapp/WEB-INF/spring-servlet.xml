@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<beans:beans xmlns:beans="http://www.springframework.org/schema/beans"
+<beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
 	xmlns:mvc="http://www.springframework.org/schema/mvc"
 	xmlns:jpa="http://www.springframework.org/schema/data/jpa"
@@ -14,13 +14,10 @@
 
 	<context:component-scan base-package="com.springapp.rest" />
 	<mvc:annotation-driven />
-	
-	<!-- JSON Support   
-    <bean name="viewResolver" class="org.springframework.web.servlet.view.BeanNameViewResolver"/>
-    <bean name="jsonTemplate" class="org.springframework.web.servlet.view.json.MappingJackson2JsonView"/>  -->
-	<!-- Configure bean to convert JSON to POJO and vice versa 
-    <beans:bean id="jsonMessageConverter" class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
-	</beans:bean> -->
 	<jpa:repositories base-package="com.springapp.rest.repository" />
 	
-</beans:beans>
+	<!-- JSON Support -->
+    <bean name="viewResolver" class="org.springframework.web.servlet.view.BeanNameViewResolver"/>
+    <bean name="jsonTemplate" class="org.springframework.web.servlet.view.json.MappingJackson2JsonView"/>
+	
+</beans>

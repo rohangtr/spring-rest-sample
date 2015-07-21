@@ -2,8 +2,6 @@ package com.springapp.rest.controller;
  
 import java.util.List;
 
-import javax.inject.Inject;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -14,13 +12,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.fasterxml.jackson.databind.util.JSONPObject;
 import com.springapp.rest.model.Employee;
-import com.springapp.rest.repository.EmployeeDAO;
 import com.springapp.rest.repository.EmployeeRepository;
-import com.springapp.rest.repository.StaticEmployeeDAO;
 import com.springapp.rest.utilities.Utilities;
-
-import net.minidev.json.JSONObject;
  
 @Controller
 public class EmployeeRESTController 
@@ -59,18 +54,17 @@ public class EmployeeRESTController
     		method=RequestMethod.DELETE, 
     		produces=MediaType.APPLICATION_JSON_VALUE)
     
-    public ResponseEntity<JSONObject> deleteEmployeeById (@PathVariable("id") Long id) 
+    public ResponseEntity<JSONPObject> deleteEmployeeById (@PathVariable("id") Long id) 
     {
 
         if (employeeRepository.exists(id)) {
-        	JSONObject jsonObject = new JSONObject();
-            jsonObject.put("message", "Employee succesfully deleted");
+        	
             employeeRepository.delete(id);
-            return new ResponseEntity<JSONObject>(jsonObject,HttpStatus.OK);
+            JSONPObject jsonObject = new JSONPObject("message", "Employee succesfully deleted");
+            return new ResponseEntity<JSONPObject>(jsonObject,HttpStatus.OK);
         }else{
-        	JSONObject jsonObject = new JSONObject();
-            jsonObject.put("message", "Can not find Employee");
-        	return new ResponseEntity<JSONObject>(jsonObject,HttpStatus.NOT_FOUND);
+        	JSONPObject jsonObject = new JSONPObject("message", "Can not find Employee");
+        	return new ResponseEntity<JSONPObject>(jsonObject,HttpStatus.NOT_FOUND);
         }
     }
     
@@ -78,13 +72,10 @@ public class EmployeeRESTController
     		method=RequestMethod.POST, 
     		produces=MediaType.APPLICATION_JSON_VALUE)
     
-    public ResponseEntity<JSONObject> postEmployeeById (@RequestBody Employee employee) 
+    public ResponseEntity<JSONPObject> postEmployeeById (@RequestBody Employee employee) 
     {
-    	System.out.println(employee);
-    	
-    	employeeRepository.save(employee);
-        JSONObject jsonObject = new JSONObject();
-        jsonObject.put("message", "Employee succesfully added");
-        return new ResponseEntity<JSONObject>(jsonObject,HttpStatus.OK);
+	   	employeeRepository.save(employee);
+	   	JSONPObject jsonObject = new JSONPObject("message", "Employee succesfully added");
+        return new ResponseEntity<JSONPObject>(jsonObject,HttpStatus.OK);
     }
 }
