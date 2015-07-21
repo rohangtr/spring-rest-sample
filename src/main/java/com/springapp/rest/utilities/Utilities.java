@@ -1,16 +1,25 @@
 package com.springapp.rest.utilities;
 
-import com.springapp.rest.repository.StaticEmployeeDAO;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.springapp.rest.repository.EmployeeRepository;
 
 public class Utilities {
-
-	public static void main(String[] args) {
-		StaticEmployeeDAO sedao = new StaticEmployeeDAO();
-		
-		System.out.println(sedao.getEmployee(2));
-		System.out.println(sedao.deleteEmployee(2));
-		System.out.println(sedao.getEmployee(2));
-
+	@Autowired
+	EmployeeRepository employeeRepository;
+	
+	public static <E> List<E> makeList(Iterable<E> iter) {
+		List<E> list = new ArrayList<E>();
+	    for (E item : iter) {
+	        list.add(item);
+	    }
+	    return list;
 	}
-
+	public static void main(String[] args){
+		Utilities util = new Utilities();
+		System.out.println(util.employeeRepository);
+	}
 }
