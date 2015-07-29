@@ -14,16 +14,18 @@
     http://www.springframework.org/schema/data/jpa/spring-jpa.xsd
     http://www.springframework.org/schema/aop
     http://www.springframework.org/schema/aop/spring-aop-3.0.xsd ">
-
-	<context:component-scan base-package="com.springapp.rest" />
+	
+	
+	<context:component-scan base-package="com.springapp.aop.logging,com.springapp.rest" />
 	<mvc:annotation-driven />
 	<jpa:repositories base-package="com.springapp.rest.repository" />
 	
 	<!-- JSON Support -->
     <bean name="viewResolver" class="org.springframework.web.servlet.view.BeanNameViewResolver"/>
     <bean name="jsonTemplate" class="org.springframework.web.servlet.view.json.MappingJackson2JsonView"/>
+    <bean id="loggingAspect" class="com.springapp.aop.logging.MyLoggingAspect" />
     
     <aop:aspectj-autoproxy />
- 	<context:component-scan base-package="com.howtodoinjava.demo.aop" />
+ 	
 	
 </beans>

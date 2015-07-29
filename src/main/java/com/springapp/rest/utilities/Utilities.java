@@ -11,6 +11,7 @@ public class Utilities {
 	@Autowired
 	EmployeeRepository employeeRepository;
 	
+	
 	public static <E> List<E> makeList(Iterable<E> iter) {
 		List<E> list = new ArrayList<E>();
 	    for (E item : iter) {
@@ -20,6 +21,6 @@ public class Utilities {
 	}
 	public static void main(String[] args){
 		Utilities util = new Utilities();
-		System.out.println(util.employeeRepository);
+		System.out.println("rohan");
 	}
 }
