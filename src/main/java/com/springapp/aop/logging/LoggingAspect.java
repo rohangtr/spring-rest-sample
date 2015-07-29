@@ -1,5 +1,7 @@
 package com.springapp.aop.logging;
 
+import java.util.Arrays;
+
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
@@ -8,7 +10,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 @Aspect
-public class MyLoggingAspect {
+public class LoggingAspect {
 	
 	private final Logger log = LoggerFactory.getLogger(this.getClass());
 	
@@ -18,21 +20,19 @@ public class MyLoggingAspect {
 	}
 	
 	@Around("loggingPointCut()")
-	public Object empArroungAdvice(ProceedingJoinPoint proceedingJointPointCut){
+	public Object empArroungAdvice(ProceedingJoinPoint pjp){
 		
-		//log.info("Info From {},{}()", proceedingJointPointCut.getSignature().getDeclaringType(),proceedingJointPointCut.getSignature().getDeclaringTypeName());
-		System.out.println("Logging Aspect :: "+ proceedingJointPointCut.getSignature().getDeclaringTypeName()+"."+proceedingJointPointCut.getSignature().getName()+"()");
+		log.info("Info From {},{}({})", pjp.getSignature().getDeclaringType(),
+				pjp.getSignature().getName(), Arrays.toString(pjp.getArgs()));
 		
 		Object result = null;
-		try{
-			
-			result = proceedingJointPointCut.proceed();
-			
+		try{		
+			result = pjp.proceed();
 		}
 		catch (Throwable e) {
 			log.error("Error occured. Reason {}",e.getCause());
-			System.out.println("Error occured. Reason "+ e.getCause());
 		}
+		log.info("Returned Value :: {}", result);
 		return result;
 	}
 

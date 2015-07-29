@@ -43,7 +43,7 @@ public class EmployeeRESTController
     public ResponseEntity<Employee> getEmployeeById (@PathVariable("id") Long id) 
     {
     	
-        if (employeeRepository.findOne(id)!=null) {
+        if (employeeRepository.exists(id)) {
             Employee employee = employeeRepository.findOne(id);
             return new ResponseEntity<Employee>(employee, HttpStatus.OK);
         }
