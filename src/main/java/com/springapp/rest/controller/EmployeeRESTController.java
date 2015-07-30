@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.fasterxml.jackson.databind.util.JSONPObject;
 import com.springapp.rest.model.Employee;
 import com.springapp.rest.repository.EmployeeRepository;
+import com.springapp.rest.service.EmployeeService;
 import com.springapp.rest.utilities.Utilities;
  
 @Controller
@@ -23,6 +24,8 @@ public class EmployeeRESTController
 	
 	@Autowired
 	EmployeeRepository employeeRepository;
+	@Autowired
+	EmployeeService employeeService;
 	
 	
     @RequestMapping(value = "/employees", 
@@ -31,7 +34,8 @@ public class EmployeeRESTController
     
     public ResponseEntity<List<Employee>> getAllEmployees() 
     {
-    	List<Employee> emp = Utilities.makeList(employeeRepository.findAll());
+    	//List<Employee> emp = Utilities.makeList(employeeRepository.findAll());
+    	List<Employee> emp = employeeService.getEmployeeList();
     	
         return  new ResponseEntity<List<Employee>>(emp, HttpStatus.OK);
     }

@@ -14,7 +14,7 @@ public class LoggingAspect {
 	
 	private final Logger log = LoggerFactory.getLogger(this.getClass());
 	
-	@Pointcut("within(com.springapp.rest.controller..*)")
+	@Pointcut("within(com.springapp.rest.controller..*) || within(com.springapp.rest.service.EmployeeService) ")
 	public void loggingPointCut(){
 		
 	}
