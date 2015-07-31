@@ -7,13 +7,8 @@ import org.springframework.stereotype.Service;
 public class EmployeeAuditService {
 	
 	@Async
-	public void excecuteAudit(String str){
-		//Sleep for 5 sec to see that it has run in other thread
-		try {
-			Thread.sleep(5000);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
+	public void excecuteAudit(String str) {
+		
 		System.out.println("Audit ::"+ str);
 	}
 }

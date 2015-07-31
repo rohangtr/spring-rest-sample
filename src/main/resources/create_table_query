@@ -1,0 +1,6 @@
+CREATE TABLE `emp`.`audit_table` (
+  `id_audit_table` INT NOT NULL COMMENT '',
+  `method` VARCHAR(45) NOT NULL COMMENT '',
+  `prev_obj_value` VARCHAR(45) NOT NULL COMMENT '',
+  `time_stamp` DATE NOT NULL COMMENT '',
+  PRIMARY KEY (`id_audit_table`)  COMMENT '');
