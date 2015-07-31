@@ -14,16 +14,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.fasterxml.jackson.databind.util.JSONPObject;
 import com.springapp.rest.model.Employee;
-import com.springapp.rest.repository.EmployeeRepository;
 import com.springapp.rest.service.EmployeeService;
-import com.springapp.rest.utilities.Utilities;
  
 @Controller
 public class EmployeeRESTController 
 {
-	
-	@Autowired
-	EmployeeRepository employeeRepository;
+
 	@Autowired
 	EmployeeService employeeService;
 	
@@ -34,7 +30,6 @@ public class EmployeeRESTController
     
     public ResponseEntity<List<Employee>> getAllEmployees() 
     {
-    	//List<Employee> emp = Utilities.makeList(employeeRepository.findAll());
     	List<Employee> emp = employeeService.getEmployeeList();
     	
         return  new ResponseEntity<List<Employee>>(emp, HttpStatus.OK);
@@ -47,8 +42,8 @@ public class EmployeeRESTController
     public ResponseEntity<Employee> getEmployeeById (@PathVariable("id") Long id) 
     {
     	
-        if (employeeRepository.exists(id)) {
-            Employee employee = employeeRepository.findOne(id);
+        if (employeeService.ifEmployeeExists(id)) {
+            Employee employee = employeeService.getEmployee(id);
             return new ResponseEntity<Employee>(employee, HttpStatus.OK);
         }
         return new ResponseEntity<Employee>(HttpStatus.NOT_FOUND);
@@ -61,9 +56,9 @@ public class EmployeeRESTController
     public ResponseEntity<JSONPObject> deleteEmployeeById (@PathVariable("id") Long id) 
     {
 
-        if (employeeRepository.exists(id)) {
+        if (employeeService.ifEmployeeExists(id)) {
         	
-            employeeRepository.delete(id);
+        	employeeService.deleteEmployee(id);
             JSONPObject jsonObject = new JSONPObject("message", "Employee succesfully deleted");
             return new ResponseEntity<JSONPObject>(jsonObject,HttpStatus.OK);
         }else{
@@ -76,10 +71,21 @@ public class EmployeeRESTController
     		method=RequestMethod.POST, 
     		produces=MediaType.APPLICATION_JSON_VALUE)
     
-    public ResponseEntity<JSONPObject> postEmployeeById (@RequestBody Employee employee) 
+    public ResponseEntity<JSONPObject> createEmployee (@RequestBody Employee employee) 
     {
-	   	employeeRepository.save(employee);
-	   	JSONPObject jsonObject = new JSONPObject("message", "Employee succesfully added");
+    	String returnMsg = employeeService.createEmployee(employee);
+	   	JSONPObject jsonObject = new JSONPObject("message", returnMsg);
+        return new ResponseEntity<JSONPObject>(jsonObject,HttpStatus.OK);
+    }
+    
+    @RequestMapping(value = "/employee", 
+    		method=RequestMethod.PUT, 
+    		produces=MediaType.APPLICATION_JSON_VALUE)
+    
+    public ResponseEntity<JSONPObject> updateEmployeeById (@RequestBody Employee employee) 
+    {
+    	String returnMsg = employeeService.updateEmployee(employee);
+	   	JSONPObject jsonObject = new JSONPObject("message", returnMsg);
         return new ResponseEntity<JSONPObject>(jsonObject,HttpStatus.OK);
     }
     
