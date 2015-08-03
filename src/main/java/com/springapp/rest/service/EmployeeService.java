@@ -1,11 +1,13 @@
 package com.springapp.rest.service;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.springapp.rest.model.Employee;
+import com.springapp.rest.model.EmployeeAudit;
 import com.springapp.rest.repository.EmployeeRepository;
 import com.springapp.rest.utilities.Utilities;
 
@@ -19,25 +21,30 @@ public class EmployeeService {
 	
 		public List<Employee> getEmployeeList(){
 			List<Employee> employees = Utilities.makeList(employeeRepository.findAll());
-			employeeAuditService.excecuteAudit(employees.toString());
+			EmployeeAudit employeeAudit = new EmployeeAudit("get"," ", new Date(),-1l);
+			employeeAuditService.excecuteAudit(employeeAudit);
 			return employees;
 			
 		}
 		
 		public Employee getEmployee(Long id){
 			Employee emp = employeeRepository.findOne(id);
-			employeeAuditService.excecuteAudit(emp.toString());
+			EmployeeAudit employeeAudit = new EmployeeAudit("get"," ", new Date(),id);
+			employeeAuditService.excecuteAudit(employeeAudit);
 			return emp;
 		}
 		
 		public void deleteEmployee(Long id){
+			
+			EmployeeAudit employeeAudit = new EmployeeAudit("delete",employeeRepository.findOne(id).toString(), new Date(),id);
+			employeeAuditService.excecuteAudit(employeeAudit);
 			employeeRepository.delete(id);
-			employeeAuditService.excecuteAudit(id.toString());
 		}
 		
 		public String createEmployee(Employee employee){
+			EmployeeAudit employeeAudit = new EmployeeAudit("create","", new Date(),-1l);
+			employeeAuditService.excecuteAudit(employeeAudit);
 			employeeRepository.save(employee);
-			employeeAuditService.excecuteAudit("create");
 			return "Employee created succesfully";
 		}
 		
@@ -50,8 +57,10 @@ public class EmployeeService {
 			
 			if(employee.getId()!=null){
 				if(employeeRepository.exists(employee.getId())){
-						employeeRepository.save(employee);
-						return "Employee updated succesfully";	
+					EmployeeAudit employeeAudit = new EmployeeAudit("update",employeeRepository.findOne(employee.getId()).toString(), new Date(),employee.getId());
+					employeeAuditService.excecuteAudit(employeeAudit);
+					employeeRepository.save(employee);
+					return "Employee updated succesfully";	
 				}
 			}			
 			return createEmployee(employee);
