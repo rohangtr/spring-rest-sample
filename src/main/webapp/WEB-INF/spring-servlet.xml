@@ -17,8 +17,9 @@
 	
 	
 	<context:component-scan base-package="com.springapp.aop.logging,com.springapp.rest" />
-	<mvc:annotation-driven />
+
 	<jpa:repositories base-package="com.springapp.rest.repository" />
+	<mvc:default-servlet-handler/>
 	
 	<!-- JSON Support -->
     <bean name="viewResolver" class="org.springframework.web.servlet.view.BeanNameViewResolver"/>
