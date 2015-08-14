@@ -25,7 +25,7 @@ public class EmployeeRESTController
 	EmployeeRepository employeeRepository;
 	
 	
-    @RequestMapping(value = "/employees", 
+    @RequestMapping(value = "/employee", 
     		method=RequestMethod.GET, 
     		produces=MediaType.APPLICATION_JSON_VALUE)
     
@@ -36,7 +36,7 @@ public class EmployeeRESTController
         return  new ResponseEntity<List<Employee>>(emp, HttpStatus.OK);
     }
      
-    @RequestMapping(value = "/employees/{id}", 
+    @RequestMapping(value = "/employee/{id}", 
     		method=RequestMethod.GET, 
     		produces=MediaType.APPLICATION_JSON_VALUE)
     
@@ -50,7 +50,7 @@ public class EmployeeRESTController
         return new ResponseEntity<Employee>(HttpStatus.NOT_FOUND);
     }
     
-    @RequestMapping(value = "/employees/{id}", 
+    @RequestMapping(value = "/employee/{id}", 
     		method=RequestMethod.DELETE, 
     		produces=MediaType.APPLICATION_JSON_VALUE)
     
@@ -68,7 +68,7 @@ public class EmployeeRESTController
         }
     }
     
-    @RequestMapping(value = "/employees", 
+    @RequestMapping(value = "/employee", 
     		method=RequestMethod.POST, 
     		produces=MediaType.APPLICATION_JSON_VALUE)
     
