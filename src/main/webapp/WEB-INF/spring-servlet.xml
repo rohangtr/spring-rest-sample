@@ -14,8 +14,8 @@
 
 	<context:component-scan base-package="com.springapp.rest" />
 	<mvc:annotation-driven />
-	<jpa:repositories base-package="com.springapp.rest.repository" />
-	
+	<jpa:repositories base-package="com.springapp.rest.repository" 
+  		factory-class="org.springframework.data.envers.repository.support.EnversRevisionRepositoryFactoryBean"></jpa:repositories>
 	<!-- JSON Support -->
     <bean name="viewResolver" class="org.springframework.web.servlet.view.BeanNameViewResolver"/>
     <bean name="jsonTemplate" class="org.springframework.web.servlet.view.json.MappingJackson2JsonView"/>
