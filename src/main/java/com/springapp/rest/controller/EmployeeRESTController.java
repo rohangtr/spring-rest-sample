@@ -78,4 +78,15 @@ public class EmployeeRESTController
 	   	JSONPObject jsonObject = new JSONPObject("message", "Employee succesfully added");
         return new ResponseEntity<JSONPObject>(jsonObject,HttpStatus.OK);
     }
+    
+    @RequestMapping(value = "/employee", 
+    		method=RequestMethod.PUT, 
+    		produces=MediaType.APPLICATION_JSON_VALUE)
+    
+    public ResponseEntity<JSONPObject> updateEmployee (@RequestBody Employee employee) 
+    {
+	   	employeeRepository.save(employee);
+	   	JSONPObject jsonObject = new JSONPObject("message", "Employee succesfully updated");
+        return new ResponseEntity<JSONPObject>(jsonObject,HttpStatus.OK);
+    }
 }

@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.springapp.rest.model.Employee;
 import com.springapp.rest.repository.EmployeeRepository;
 
 public class Utilities {
@@ -21,5 +22,10 @@ public class Utilities {
 	public static void main(String[] args){
 		Utilities util = new Utilities();
 		System.out.println(util.employeeRepository);
+	}
+	public static Employee getCurrentUser() {
+		Employee emp = new Employee();
+		emp.setId(1l);
+		return emp;
 	}
 }
