@@ -17,5 +17,4 @@ public class Utilities {
 			list.add(item);
 		}
 		return list;
-	}
 }

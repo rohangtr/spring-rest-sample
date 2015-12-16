@@ -27,6 +27,8 @@ public class PersistenceConfiguration {
 	@Autowired
 	private Environment env;
 
+public class PersistenceConfiguration {
+
 	@Bean
 	public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
 		LocalContainerEntityManagerFactoryBean em = new LocalContainerEntityManagerFactoryBean();
