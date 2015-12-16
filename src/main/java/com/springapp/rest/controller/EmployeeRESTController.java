@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.fasterxml.jackson.databind.util.JSONPObject;
 import com.springapp.rest.model.Employee;
+import com.springapp.rest.repository.EmployeeRepository;
 import com.springapp.rest.service.EmployeeService;
  
 @Controller
@@ -22,6 +23,9 @@ public class EmployeeRESTController
 
 	@Autowired
 	EmployeeService employeeService;
+	
+	@Autowired
+	EmployeeRepository employeeRepository;
 	
 	
     @RequestMapping(value = "/employee", 
