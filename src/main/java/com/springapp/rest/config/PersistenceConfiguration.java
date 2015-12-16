@@ -18,50 +18,50 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @Configuration
 @EnableTransactionManagement
-public class PersistenceConfiguration{
- 
-   @Bean
-   public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
-      LocalContainerEntityManagerFactoryBean em = new LocalContainerEntityManagerFactoryBean();
-      em.setDataSource(dataSource());
-      em.setPackagesToScan(new String[] {"com.springapp.rest.model"});
- 
-      JpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
-      em.setJpaVendorAdapter(vendorAdapter);
-      em.setJpaProperties(additionalProperties());
- 
-      return em;
-   }
- 
-   @Bean
-   public DataSource dataSource(){
-      DriverManagerDataSource dataSource = new DriverManagerDataSource();
-      dataSource.setDriverClassName("com.mysql.jdbc.Driver");
-      dataSource.setUrl("jdbc:mysql://localhost:3306/Company");
-      dataSource.setUsername( "root" );
-      dataSource.setPassword( "rohan" );
-      return dataSource;
-   }
- 
-   @Bean
-   public PlatformTransactionManager transactionManager(EntityManagerFactory emf){
-      JpaTransactionManager transactionManager = new JpaTransactionManager();
-      transactionManager.setEntityManagerFactory(emf);
- 
-      return transactionManager;
-   }
- 
-   @Bean
-   public PersistenceExceptionTranslationPostProcessor exceptionTranslation(){
-      return new PersistenceExceptionTranslationPostProcessor();
-   }
- 
-   Properties additionalProperties() {
-      Properties properties = new Properties();
-      properties.setProperty("hibernate.hbm2ddl.auto", "update");
-      properties.setProperty("hibernate.dialect", "org.hibernate.dialect.MySQL5Dialect");
-      properties.setProperty("hibernate.show_sql", "true");
-      return properties;
-   }
-   
+public class PersistenceConfiguration {
+
+	@Bean
+	public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
+		LocalContainerEntityManagerFactoryBean em = new LocalContainerEntityManagerFactoryBean();
+		em.setDataSource(dataSource());
+		em.setPackagesToScan(new String[] { "com.springapp.rest.model" });
+
+		JpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
+		em.setJpaVendorAdapter(vendorAdapter);
+		em.setJpaProperties(additionalProperties());
+
+		return em;
+	}
+
+	@Bean
+	public DataSource dataSource() {
+		DriverManagerDataSource dataSource = new DriverManagerDataSource();
+		dataSource.setDriverClassName("com.mysql.jdbc.Driver");
+		dataSource.setUrl("jdbc:mysql://localhost:3306/Company");
+		dataSource.setUsername("root");
+		dataSource.setPassword("rohan");
+		return dataSource;
+	}
+
+	@Bean
+	public PlatformTransactionManager transactionManager(EntityManagerFactory emf) {
+		JpaTransactionManager transactionManager = new JpaTransactionManager();
+		transactionManager.setEntityManagerFactory(emf);
+
+		return transactionManager;
+	}
+
+	@Bean
+	public PersistenceExceptionTranslationPostProcessor exceptionTranslation() {
+		return new PersistenceExceptionTranslationPostProcessor();
+	}
+
+	Properties additionalProperties() {
+		Properties properties = new Properties();
+		properties.setProperty("hibernate.hbm2ddl.auto", "update");
+		properties.setProperty("hibernate.dialect", "org.hibernate.dialect.MySQL5Dialect");
+		properties.setProperty("hibernate.show_sql", "true");
+		return properties;
+	}
+
 }
