@@ -14,30 +14,24 @@ public class EmployeeService {
 	
 	@Autowired
 	EmployeeRepository employeeRepository;
-	@Autowired
-	EmployeeAuditService employeeAuditService;
 	
 		public List<Employee> getEmployeeList(){
 			List<Employee> employees = Utilities.makeList(employeeRepository.findAll());
-			employeeAuditService.excecuteAudit(employees.toString());
 			return employees;
 			
 		}
 		
 		public Employee getEmployee(Long id){
 			Employee emp = employeeRepository.findOne(id);
-			employeeAuditService.excecuteAudit(emp.toString());
 			return emp;
 		}
 		
 		public void deleteEmployee(Long id){
 			employeeRepository.delete(id);
-			employeeAuditService.excecuteAudit(id.toString());
 		}
 		
 		public String createEmployee(Employee employee){
 			employeeRepository.save(employee);
-			employeeAuditService.excecuteAudit("create");
 			return "Employee created succesfully";
 		}
 		
