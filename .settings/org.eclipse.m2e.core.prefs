@@ -1,4 +1,18 @@
 activeProfiles=
 eclipse.preferences.version=1
 resolveWorkspaceProjects=true
+org.eclipse.m2e.wtp.enableM2eWtp=true
 version=1
+
+
+Description	Resource	Path	Location	Type
+C:\Users\rohkushw\git\spring-rest-sample\target\m2e-wtp\web-resources\META-INF\MANIFEST.MF (The system cannot find the path specified)	pom.xml	/springrestsample	line 1	Maven Configuration Problem
+
+
+Execution default of goal com.mysema.maven:apt-maven-plugin:1.1.3:process failed: Unable to load the mojo 'process' (or one of its required components) from the plugin 'com.mysema.maven:apt-maven-plugin:1.1.3' (com.mysema.maven:apt-maven-plugin:1.1.3:process:default:generate-sources)
+
+org.apache.maven.plugin.PluginExecutionException: Execution default of goal com.mysema.maven:apt-maven-plugin:1.1.3:process failed: Unable to load the mojo 'process' (or one of its required components) from the plugin 'com.mysema.maven:apt-maven-plugin:1.1.3'
+	at org.apache.maven.plugin.DefaultBuildPluginManager.executeMojo(DefaultBuildPluginManager.java:153)
+	at org.eclipse.m2e.core.internal.embedder.MavenImpl.execute(MavenImpl.java:331)
+	at org.eclipse.m2e.core.internal.embedder.MavenImpl$11.call(MavenImpl.java:1362)
+	at org.eclipse.m2e.core.internal.embedder.MavenImpl$11.call(MavenImpl.java:1)

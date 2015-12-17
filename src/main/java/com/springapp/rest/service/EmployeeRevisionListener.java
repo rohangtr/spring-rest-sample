@@ -9,8 +9,6 @@ public class EmployeeRevisionListener implements RevisionListener {
 
 	public void newRevision(Object revisionEntity) {
 		EmployeeRevisionEntity entity = (EmployeeRevisionEntity) revisionEntity;
-		entity.setAuditor(Utilities.getCurrentUser());
-
+		entity.setAuditor(Utilities.getCurrentUser().toString());
 	}
-
 }
