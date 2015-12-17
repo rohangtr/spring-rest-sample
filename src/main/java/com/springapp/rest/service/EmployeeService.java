@@ -51,7 +51,7 @@ public class EmployeeService {
 				employeeRepository.save(employee);
 				return "Employee updated succesfully";
 			} else
-				return "Employee does not succesfully";
+				return "Employee does not exsits";
 		}
 		return "Cannot find Employee";
 	}
