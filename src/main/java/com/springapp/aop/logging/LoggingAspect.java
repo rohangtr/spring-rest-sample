@@ -23,8 +23,7 @@ public class LoggingAspect {
 	public Object empArroungAdvice(ProceedingJoinPoint pjp){
 		
 		log.info("Info From {},{}({})", pjp.getSignature().getDeclaringType(),
-				pjp.getSignature().getName(), Arrays.toString(pjp.getArgs()));
-		
+				pjp.getSignature().getName(), Arrays.toString(pjp.getArgs()));		
 		Object result = null;
 		try{		
 			result = pjp.proceed();
