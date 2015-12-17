@@ -8,11 +8,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 @Aspect
-public class MyLoggingAspect {
+public class LoggingAspect {
 	
 	private final Logger log = LoggerFactory.getLogger(this.getClass());
 	
-	@Pointcut("within(com.springapp.rest.controller..*)")
+	@Pointcut("within(com.springapp.rest.controller..*) || within(com.springapp.rest.service..*)")
 	public void loggingPointCut(){
 		
 	}
@@ -20,18 +20,14 @@ public class MyLoggingAspect {
 	@Around("loggingPointCut()")
 	public Object empArroungAdvice(ProceedingJoinPoint proceedingJointPointCut){
 		
-		//log.info("Info From {},{}()", proceedingJointPointCut.getSignature().getDeclaringType(),proceedingJointPointCut.getSignature().getDeclaringTypeName());
-		System.out.println("Logging Aspect :: "+ proceedingJointPointCut.getSignature().getDeclaringTypeName()+"."+proceedingJointPointCut.getSignature().getName()+"()");
-		
+		log.info("Info From {},{}({})", proceedingJointPointCut.getSignature().getDeclaringType(),
+				proceedingJointPointCut.getSignature().getDeclaringTypeName(),proceedingJointPointCut.getArgs());	
 		Object result = null;
 		try{
-			
 			result = proceedingJointPointCut.proceed();
-			
 		}
 		catch (Throwable e) {
 			log.error("Error occured. Reason {}",e.getCause());
-			System.out.println("Error occured. Reason "+ e.getCause());
 		}
 		return result;
 	}

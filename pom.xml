@@ -106,6 +106,16 @@
 		<artifactId>spring-data-envers</artifactId>
 		<version>0.2.0.RELEASE</version>
 	</dependency>
+	<dependency>
+		<groupId>org.slf4j</groupId>
+		<artifactId>slf4j-api</artifactId>
+		<version>1.7.13</version>
+	</dependency>
+	<dependency>
+		<groupId>org.slf4j</groupId>
+		<artifactId>slf4j-simple</artifactId>
+		<version>1.7.13</version>
+	</dependency>
   </dependencies>
   <build>
     <finalName>springrestsample</finalName>
