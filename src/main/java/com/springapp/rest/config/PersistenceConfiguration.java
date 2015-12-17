@@ -19,6 +19,11 @@ import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
+/**
+ * @author Rohan Kushwaha
+ *
+ */
+
 @Configuration
 @EnableTransactionManagement
 @PropertySource("classpath:config.properties")

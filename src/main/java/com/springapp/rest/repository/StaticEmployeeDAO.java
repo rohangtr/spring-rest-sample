@@ -7,6 +7,11 @@ import java.util.Map;
 
 import com.springapp.rest.model.Employee;
 
+/**
+ * @author Rohan Kushwaha
+ *
+ */
+
 public class StaticEmployeeDAO implements EmployeeDAO {
 	
 	static Map<Long, Employee> empMap;

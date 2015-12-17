@@ -15,13 +15,16 @@ import org.hibernate.envers.RevisionTimestamp;
 
 import com.springapp.rest.service.EmployeeRevisionListener;
 
+/**
+ * @author Rohan Kushwaha
+ *
+ */
+
 @Entity
 @Table(name = "AUDIT_REVISION_INFO")
 @RevisionEntity(EmployeeRevisionListener.class)
 public class EmployeeRevisionEntity {
-	/**
-	 * 
-	 */
+
 	private static final long serialVersionUID = 1L;
 
 	@Id

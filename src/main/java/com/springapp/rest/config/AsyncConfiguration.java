@@ -12,6 +12,11 @@ import org.springframework.scheduling.annotation.AsyncConfigurer;
 import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 
+/**
+ * @author Rohan Kushwaha
+ *
+ */
+
 @Configuration
 @EnableAsync
 @PropertySource("classpath:config.properties")

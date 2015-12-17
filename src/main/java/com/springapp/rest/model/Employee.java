@@ -8,6 +8,11 @@ import javax.persistence.Id;
 
 import org.hibernate.envers.Audited;
 
+/**
+ * @author Rohan Kushwaha
+ *
+ */
+
 @Entity
 @Audited
 public class Employee implements Serializable {
