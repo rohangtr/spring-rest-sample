@@ -115,7 +115,7 @@
 		<groupId>org.slf4j</groupId>
 		<artifactId>slf4j-simple</artifactId>
 		<version>1.7.13</version>
-	</dependency>	
+	</dependency>
   </dependencies>
   <build>
     <finalName>springrestsample</finalName>

@@ -8,6 +8,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.springapp.rest.model.Employee;
 import com.springapp.rest.repository.EmployeeRepository;
 
+/**
+ * @author Rohan Kushwaha
+ *
+ */
+
 public class Utilities {
 	@Autowired
 	EmployeeRepository employeeRepository;
@@ -20,10 +25,7 @@ public class Utilities {
 	    }
 	    return list;
 	}
-	public static void main(String[] args){
-		Utilities util = new Utilities();
-		System.out.println("rohan");
-	}
+	
 	public static Employee getCurrentUser() {
 		Employee emp = new Employee();
 		emp.setId(1l);

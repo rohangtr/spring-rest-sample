@@ -1,7 +1,5 @@
 package com.springapp.aop.logging;
 
-import java.util.Arrays;
-
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
@@ -9,29 +7,33 @@ import org.aspectj.lang.annotation.Pointcut;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/**
+ * @author Rohan Kushwaha
+ *
+ */
+
 @Aspect
 public class LoggingAspect {
 	
 	private final Logger log = LoggerFactory.getLogger(this.getClass());
 	
-	@Pointcut("within(com.springapp.rest.controller..*) || within(com.springapp.rest.service.EmployeeService) ")
+	@Pointcut("within(com.springapp.rest.controller..*) || within(com.springapp.rest.service..*)")
 	public void loggingPointCut(){
 		
 	}
 	
 	@Around("loggingPointCut()")
-	public Object empArroungAdvice(ProceedingJoinPoint pjp){
+	public Object empArroungAdvice(ProceedingJoinPoint proceedingJointPointCut){
 		
-		log.info("Info From {},{}({})", pjp.getSignature().getDeclaringType(),
-				pjp.getSignature().getName(), Arrays.toString(pjp.getArgs()));		
+		log.info("Info From {},{}({})", proceedingJointPointCut.getSignature().getDeclaringType(),
+				proceedingJointPointCut.getSignature().getDeclaringTypeName(),proceedingJointPointCut.getArgs());	
 		Object result = null;
-		try{		
-			result = pjp.proceed();
+		try{
+			result = proceedingJointPointCut.proceed();
 		}
 		catch (Throwable e) {
 			log.error("Error occured. Reason {}",e.getCause());
 		}
-		log.info("Returned Value :: {}", result);
 		return result;
 	}
 

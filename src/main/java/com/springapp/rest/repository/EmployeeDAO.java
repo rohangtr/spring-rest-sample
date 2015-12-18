@@ -4,6 +4,11 @@ import java.util.List;
 
 import com.springapp.rest.model.Employee;
 
+/**
+ * @author Rohan Kushwaha
+ *
+ */
+
 public interface EmployeeDAO {
 	
 	public Employee getEmployee(Long id);

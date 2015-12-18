@@ -7,6 +7,11 @@ import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.view.BeanNameViewResolver;
 import org.springframework.web.servlet.view.json.MappingJackson2JsonView;;
 
+/**
+ * @author Rohan Kushwaha
+ *
+ */
+
 @Configuration
 public class JacksonConfiguration {
 
